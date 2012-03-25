@@ -17,7 +17,7 @@ public class GatewayRunner {
   private String robotName;
   
   // de default GatewayRunner has a Bluetooth and a real MQ connection.
-  private BluetoothConnection connection = new BluetoothConnection();
+  private BluetoothConnection connection = new BluetoothConnection(null);
   private MQ queue;
   // the actual Gateway
   private Gateway gateway;

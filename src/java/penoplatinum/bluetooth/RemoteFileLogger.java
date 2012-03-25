@@ -5,7 +5,6 @@ package penoplatinum.bluetooth;
  * 
  * @author: Team Platinum
  */
-
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +24,6 @@ public class RemoteFileLogger {
   private final File directory;
   private final QueuedPacketTransporter pt;
 
-
   public void setOutputStream(IRemoteLoggerCallback outputStream) {
     this.outputStream = outputStream;
   }
@@ -36,6 +34,7 @@ public class RemoteFileLogger {
     pt = new QueuedPacketTransporter(conn);
     conn.RegisterTransporter(pt, Config.BT_LOG);
     conn.RegisterTransporter(pt, Config.BT_START_LOG);
+    conn.RegisterTransporter(pt, Config.BT_GHOST_PROTOCOL);
     this.directory = directory;
     directory.mkdirs();
   }
@@ -52,17 +51,7 @@ public class RemoteFileLogger {
           int id = pt.ReceivePacket();
           Scanner scanner = new Scanner(pt.getReceiveStream()); //TODO: GC
 
-          if (id == Config.BT_LOG) {
-            String s;
-            s = scanner.nextLine();
-            fs.println(s);
-            System.out.println(s);
-
-            if (extraOutputStream != null) {
-              extraOutputStream.onLog(s);
-            }
-
-          } else if (id == Config.BT_START_LOG) {
+          if (id == Config.BT_START_LOG) {
             String baseFilename = scanner.nextLine();
             if (baseFilename.length() == 0) {
               baseFilename = "DEFAULT";
@@ -80,8 +69,14 @@ public class RemoteFileLogger {
             } catch (FileNotFoundException ex) {
               Logger.getLogger(RemoteFileLogger.class.getName()).log(Level.SEVERE, null, ex);
             }
+          } else {
+            String s = scanner.nextLine();
+            fs.println(s);
+            System.out.println(s);
+            if (extraOutputStream != null) {
+              extraOutputStream.onLog(s);
+            }
           }
-
         }
       }
     });

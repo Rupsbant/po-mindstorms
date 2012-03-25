@@ -19,7 +19,6 @@ public class MainLogger {
         PCBluetoothConnection conn = new PCBluetoothConnection();
         conn.initializeConnection();
 
-
         RemoteFileLogger logger = new RemoteFileLogger(conn, "RobotLog", new File("logs"));
         logger.startLogging();
 

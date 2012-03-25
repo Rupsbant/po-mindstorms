@@ -49,7 +49,8 @@ public class BluetoothConnection implements Connection {
 
   public BluetoothConnection send(String msg, int channel) {
     try {
-      this.endPoint.getSendStream().write(msg.getBytes());
+      byte[] buf = getBytes(msg);
+      this.endPoint.getSendStream().write(buf, 0, buf.length);
       this.endPoint.SendPacket(channel);
     } catch (IOException ex) {
       //logger.error( "Could not send message to channel : " + channel );
@@ -90,5 +91,15 @@ public class BluetoothConnection implements Connection {
 
   public IConnection getConnection() {
     return connection;
+  }
+
+  public static byte[] getBytes(String s) {
+    char[] characters;
+    characters = s.toCharArray();
+    byte[] b = new byte[characters.length];
+    for (int i = 0; i < characters.length; i++) {
+      b[i] = (byte) characters[i];
+    }
+    return b;
   }
 }

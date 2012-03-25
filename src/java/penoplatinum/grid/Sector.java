@@ -19,16 +19,16 @@ public class Sector {
   // links to the adjacent Sectors
   private Sector[] neighbours = new Sector[4];
   // position within Grid
-  private int left, top;
+  private byte left, top;
   // walls and the certainty about them
-  private char walls     = 0;
-  private char certainty = 0;
+  private byte tagCode = -1;
+  private byte tagBearing;
+  private byte walls     = 0;
+  private byte certainty = 0;
   // the agent currently on this Sector
   private Agent agent;
   // the value associated with this sector
   private int value = 0;
-  private int tagCode = -1;
-  private int tagBearing;
 
   public Sector() {
     this.putOn(NullGrid.getInstance());
@@ -48,8 +48,8 @@ public class Sector {
 
   // sets the absolute coordinates in the Grid this Sector is placed in
   public Sector setCoordinates(int left, int top) {
-    this.left = left;
-    this.top = top;
+    this.left = (byte) left;
+    this.top = (byte) top;
     return this;
   }
 
@@ -199,20 +199,20 @@ public class Sector {
     return this.agent != null ? this.agent.getValue() : this.value;
   }
 
-  public int getTagBearing() {
+  public byte getTagBearing() {
     return tagBearing;
   }
 
-  public void setTagBearing(int tagBearing) {
+  public void setTagBearing(byte tagBearing) {
     this.tagBearing = tagBearing;
     grid.barcodesNeedRefresh();
   }
 
-  public int getTagCode() {
+  public byte getTagCode() {
     return tagCode;
   }
 
-  public void setTagCode(int tagCode) {
+  public void setTagCode(byte tagCode) {
     this.tagCode = tagCode;
     grid.addTaggedSector(this);
     grid.barcodesNeedRefresh();
@@ -251,7 +251,7 @@ public class Sector {
   }
 
   // adds all walls at once
-  public Sector addWalls(char walls) {
+  public Sector addWalls(byte walls) {
     this.withWalls(walls);
     // also update neighbours
     this.updateNeighboursWalls();
@@ -298,7 +298,7 @@ public class Sector {
   }
 
   // returns all wall configuration
-  public char getWalls() {
+  public byte getWalls() {
     return this.walls;
   }
 
@@ -310,8 +310,8 @@ public class Sector {
 
   // clears all knowledge about a wall
   public Sector clearWall(int atLocation) {
-    this.walls     = (char) BitwiseOperations.unsetBit(this.walls, atLocation);
-    this.certainty = (char) BitwiseOperations.unsetBit(this.certainty, atLocation);
+    this.walls     = (byte) BitwiseOperations.unsetBit(this.walls, atLocation);
+    this.certainty = (byte) BitwiseOperations.unsetBit(this.certainty, atLocation);
     return this;
   }
 
@@ -337,22 +337,22 @@ public class Sector {
   }
   
   private void withWall(int location) { 
-    this.walls     = (char) BitwiseOperations.setBit(this.walls,     location);
-    this.certainty = (char) BitwiseOperations.setBit(this.certainty, location);
+    this.walls     = (byte) BitwiseOperations.setBit(this.walls,     location);
+    this.certainty = (byte) BitwiseOperations.setBit(this.certainty, location);
   }
 
-  public void withWalls(char walls) {
+  public void withWalls(byte walls) {
     this.walls    = walls;
     this.certainty = 15;
   }
 
   public void withoutWall(int location)  { 
-    this.walls     = (char) BitwiseOperations.unsetBit(this.walls,     location);
-    this.certainty = (char) BitwiseOperations.setBit(this.certainty, location);
+    this.walls     = (byte) BitwiseOperations.unsetBit(this.walls,     location);
+    this.certainty = (byte) BitwiseOperations.setBit(this.certainty, location);
   }
 
   public void dontKnow(int location)  { 
-    this.certainty = (char) BitwiseOperations.unsetBit(this.certainty, location);
+    this.certainty = (byte) BitwiseOperations.unsetBit(this.certainty, location);
   }
 
   public boolean hasRawWall(int location) {

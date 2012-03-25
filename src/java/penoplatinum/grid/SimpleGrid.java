@@ -288,7 +288,7 @@ public class SimpleGrid implements Grid {
     }
     if (s.getTagCode() != -1) {
       thisSector.setTagCode(s.getTagCode());
-      thisSector.setTagBearing((s.getTagBearing() + rotation) % 4);
+      thisSector.setTagBearing((byte)((s.getTagBearing() + rotation) % 4));
     }
 
   }

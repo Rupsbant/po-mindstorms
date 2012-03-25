@@ -48,7 +48,7 @@ public class GridFactory {
         if (v == -1) continue;
         Sector sector = new Sector(g)
                           .setCoordinates(left, top)
-                          .addWalls((char) v)
+                          .addWalls((byte) v)
                           .setValue(value);
         g.addSector(sector); // add it to the grid, this will connect it
         // to its neighbours
@@ -64,18 +64,19 @@ public class GridFactory {
 
     while (scanner.hasNext()) {
       String type, name = "";
-      int left, top, orientation;
+      int left, top;
+      byte orientation;
 
       type = scanner.next();
       left = scanner.nextInt();
       top = scanner.nextInt();
-      orientation = scanner.nextInt();
+      orientation = scanner.nextByte();
       Sector sector = g.getSector(left, top);
       if (sector != null) {
         Agent agent;
         if (type.equals("tag")) {
           sector.setTagBearing(orientation);
-          sector.setTagCode(scanner.nextInt());
+          sector.setTagCode(scanner.nextByte());
           
         } else {
           if (type.equals("ghost")) {

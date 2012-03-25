@@ -130,8 +130,8 @@ public class GhostProtocolModelCommandHandler implements GhostProtocolCommandHan
     if (agent.getSector() == null) {
       int magicI = 8;
     }
-    agent.getSector().setTagCode(code);
-    agent.getSector().setTagBearing(bearing);
+    agent.getSector().setTagCode((byte) code);
+    agent.getSector().setTagBearing((byte) bearing);
 
     // tag the current sector of the agent with the given barcode
     // check if we have it too

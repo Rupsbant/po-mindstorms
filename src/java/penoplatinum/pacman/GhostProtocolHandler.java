@@ -89,7 +89,7 @@ public class GhostProtocolHandler implements ProtocolHandler {
     } catch (Exception e) {
       if( Config.DEBUGMODE ) {
         Utils.Log("Protocol error!! (" + msg + ")");
-        e.printStackTrace();
+        //e.printStackTrace();
       }
     }
   }

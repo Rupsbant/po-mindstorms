@@ -38,16 +38,16 @@ public class MergeGridModelProcessor extends ModelProcessor {
     if (model.getBarcodePart().getLastBarcode() == -1) {
       // remove potential incorrect barcode
 
-      gridPart.getAgent().getSector().setTagCode(-1);
-      gridPart.getAgent().getSector().setTagBearing(0);
+      gridPart.getAgent().getSector().setTagCode((byte)-1);
+      gridPart.getAgent().getSector().setTagBearing((byte) 0);
       return;
     }
 
 
     // We drove over a barcode on this tile
 
-    gridPart.getAgent().getSector().setTagCode(model.getBarcodePart().getLastBarcode());
-    gridPart.getAgent().getSector().setTagBearing(gridPart.getAgent().getBearing());
+    gridPart.getAgent().getSector().setTagCode((byte)model.getBarcodePart().getLastBarcode());
+    gridPart.getAgent().getSector().setTagBearing((byte)gridPart.getAgent().getBearing());
 
     //Find this barcode in the othergrids and map!!
 
