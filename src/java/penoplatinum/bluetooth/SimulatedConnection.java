@@ -77,4 +77,9 @@ public class SimulatedConnection implements IConnection {
     builder.sendPacket(packetIdentifier, dgram);
 
   }
+
+  @Override
+  public void initializeConnection() {
+    //Nothing needed
+  }
 }

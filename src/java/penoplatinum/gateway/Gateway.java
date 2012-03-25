@@ -10,8 +10,6 @@ package penoplatinum.gateway;
 
 import org.apache.log4j.Logger;
 
-import penoplatinum.bluetooth.SimulatedConnection;
-import penoplatinum.util.Utils;
 
 import penoplatinum.Config;
 

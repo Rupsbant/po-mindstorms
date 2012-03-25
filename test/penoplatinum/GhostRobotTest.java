@@ -10,7 +10,6 @@ import penoplatinum.pacman.GhostRobot;
 import penoplatinum.pacman.LeftFollowingGhostNavigator;
 import penoplatinum.grid.SwingGridView;
 import penoplatinum.pacman.GhostNavigator;
-import penoplatinum.simulator.Bearing;
 import penoplatinum.simulator.SimulatedEntity;
 import penoplatinum.simulator.SimulationRobotAPI;
 import penoplatinum.simulator.SimulatedGatewayClient;

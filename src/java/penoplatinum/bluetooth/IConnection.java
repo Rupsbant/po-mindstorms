@@ -19,9 +19,10 @@ public interface IConnection {
       * @param packetIdentifier 
       */
      void RegisterTransporter(IPacketTransporter transporter, int packetIdentifier);
-     
-     
-     
+
      void SendPacket(IPacketTransporter transporter, int packetIdentifier,byte[] dgram );
+
+  void initializeConnection();
+     
      
 }

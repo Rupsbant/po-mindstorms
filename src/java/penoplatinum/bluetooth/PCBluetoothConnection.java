@@ -59,14 +59,9 @@ public class PCBluetoothConnection implements IConnection {
 
         // Connected to NXJ, perform packet ID synchronization here (possible optimization)
 
-
-
-
         createPacketBuilder();
-
         builder.startReceiving();
         connected = true;
-
     }
 
     private void createPacketBuilder() {
@@ -121,7 +116,6 @@ public class PCBluetoothConnection implements IConnection {
 
     private boolean connect() {
         try {
-
             outputStream = null;
             inputStream = null;
 

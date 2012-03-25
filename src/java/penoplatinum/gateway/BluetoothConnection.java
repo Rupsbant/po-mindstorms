@@ -10,38 +10,34 @@ package penoplatinum.gateway;
 import java.io.*;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import penoplatinum.bluetooth.*;
-import penoplatinum.util.Utils;
-
-import penoplatinum.bluetooth.IPacketTransporter;
-
 import penoplatinum.Config;
-
+import penoplatinum.util.Utils;
 
 public class BluetoothConnection implements Connection {
 
-  private static Logger logger = Logger.getLogger("BluetoothConnection");
-
+  private static String log4jChannel = "BluetoothConnection";
+  //private static Logger logger = Logger.getLogger(log4jChannel);
   private IConnection connection;
   private QueuedPacketTransporter endPoint;
   private String nextMsg = "";
   private int nextType = 0;
 
-  public BluetoothConnection() {
-    PCBluetoothConnection connection = new PCBluetoothConnection();
+  public BluetoothConnection(IConnection connection) {
     connection.initializeConnection();
     this.connection = connection;
     initTransporter();
   }
-  
+
   public BluetoothConnection setName(String name) {
     // TODO: take name of robot in account when connecting
     return this;
   }
-  
-  public void initTransporter() {
+
+  public final void initTransporter() {
     this.endPoint = new QueuedPacketTransporter(this.connection);
     this.connection.RegisterTransporter(this.endPoint, Config.BT_MODEL);
     this.connection.RegisterTransporter(this.endPoint, Config.BT_WALLS);
@@ -56,7 +52,8 @@ public class BluetoothConnection implements Connection {
       this.endPoint.getSendStream().write(msg.getBytes());
       this.endPoint.SendPacket(channel);
     } catch (IOException ex) {
-      logger.error( "Could not send message to channel : " + channel );
+      //logger.error( "Could not send message to channel : " + channel );
+      Utils.Log(log4jChannel + ": Could not send message:" + channel);
     }
     return this;
   }
@@ -66,14 +63,18 @@ public class BluetoothConnection implements Connection {
     String data;
     Boolean logging = true;
 
-    while (logging) {
-      packet = this.endPoint.ReceivePacket();
-      data   = new Scanner(this.endPoint.getReceiveStream()).nextLine();
-      if( data.length() > 10 ) {
-        this.nextType = packet;
-        this.nextMsg = data;
-        return true;
+    try {
+      while (logging) {
+        packet = this.endPoint.ReceivePacket();
+        data = this.endPoint.getReceiveStream().readLine();
+        if (data.length() > 10) {
+          this.nextType = packet;
+          this.nextMsg = data;
+          return true;
+        }
       }
+    } catch (IOException ex) {
+      Utils.Log("Endpoint throwed IOException");
     }
     this.nextType = 0;
     return false;

@@ -4,12 +4,11 @@ import penoplatinum.util.Utils;
 import java.io.PrintStream;
 import lejos.nxt.Button;
 import lejos.nxt.Motor;
-import lejos.nxt.SensorPort;
-import penoplatinum.sensor.IRSeekerV2.Mode;
 import penoplatinum.bluetooth.QueuedPacketTransporter;
-import penoplatinum.bluetooth.RobotBluetoothAgent;
 import penoplatinum.bluetooth.RobotBluetoothConnection;
+import penoplatinum.bluetooth.RobotGatewayClient;
 import penoplatinum.driver.GhostDriver;
+import penoplatinum.gateway.BluetoothConnection;
 import penoplatinum.pacman.GhostRobot;
 import penoplatinum.grid.Sector;
 import penoplatinum.grid.SimpleGrid;
@@ -38,9 +37,13 @@ public class Main {
     RobotBluetoothConnection conn = new RobotBluetoothConnection();
     conn.initializeConnection();
     Utils.EnableRemoteLogging(conn);
+    
+    BluetoothConnection conn2 = new BluetoothConnection(conn);
 
-    final RobotBluetoothAgent robotBluetoothAgent = new RobotBluetoothAgent();
-    robot.useGatewayClient(robotBluetoothAgent.useConnection(conn));
+    final RobotGatewayClient robotBluetoothAgent = new RobotGatewayClient();
+    robotBluetoothAgent.useConnection(conn2);
+
+    robot.useGatewayClient(robotBluetoothAgent);
     //robotBluetoothAgent.run(); This is started in robot.useGatewayClient(agent)
 
 
