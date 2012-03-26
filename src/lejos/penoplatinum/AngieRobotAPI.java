@@ -24,8 +24,8 @@ public class AngieRobotAPI implements RobotAPI {
   private final SensorPort LIGHT_SENSORPORT = SensorPort.S4;
   private final SensorPort SONAR_SENSORPORT = SensorPort.S3;
   private final SensorPort IR_SENSORPORT = SensorPort.S1;
-  private final Motor motorLeft = Motor.B;
-  private final Motor motorRight = Motor.C;
+  private final Motor motorLeft = Motor.C;
+  private final Motor motorRight = Motor.B;
   private final Motor motorSonar = Motor.A;
   
   private LightSensor light;

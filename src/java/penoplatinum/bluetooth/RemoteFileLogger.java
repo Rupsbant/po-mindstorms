@@ -5,7 +5,6 @@ package penoplatinum.bluetooth;
  * 
  * @author: Team Platinum
  */
-import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

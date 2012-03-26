@@ -137,6 +137,7 @@ public class SimpleGrid implements Grid {
   public List<Sector> getSectors() {
     //@SuppressWarnings("unchecked")
     //List<Sector> sectors = new ArrayList(this.sectors.values());
+    //return sectors;
     return sectors.values();
   }
 

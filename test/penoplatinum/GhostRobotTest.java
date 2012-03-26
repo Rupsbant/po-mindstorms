@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import penoplatinum.barcode.BarcodeTranslator;
+import penoplatinum.grid.NullGridView;
 import penoplatinum.pacman.GhostRobot;
 import penoplatinum.pacman.LeftFollowingGhostNavigator;
 import penoplatinum.grid.SwingGridView;
@@ -150,11 +151,7 @@ public class GhostRobotTest {
   @Test
   public void testGhostRobotMazeProtocol3Pacman() throws FileNotFoundException {
     sim.useMap(SimulatorTest.createSectorMazeProtocol2());
-
-
-
     String name = r.nextInt() + "";
-
     SimulatedEntity ent1 = putGhostRobot(20 + 5 * 40, 20 + 2 * 40, 0);
     SimulatedEntity ent2 = putGhostRobot(20 + 3 * 40, 20 + 1 * 40, -90);
     putGhostRobot(20 + 5 * 40, 20 + 4 * 40, 0);
@@ -173,15 +170,12 @@ public class GhostRobotTest {
 
   private SimulatedEntity putGhostRobot(int x, int y, int angle, String name) {
     return putGhostRobot(x, y, angle, new GhostNavigator(), name);
-
   }
 
   private SimulatedEntity putGhostRobot(int x, int y, int angle, Navigator nav, String name) {
     GhostRobot robot = new GhostRobot(name, new SwingGridView());
-    
-   
-    SimulatedEntity ent = new SimulatedEntity(robot);
-    
+     
+    SimulatedEntity ent = new SimulatedEntity(robot);    
     robot.useNavigator(nav);
     robot.useRobotAPI(new SimulationRobotAPI().setSimulatedEntity(ent));
     robot.useGatewayClient(new SimulatedGatewayClient());

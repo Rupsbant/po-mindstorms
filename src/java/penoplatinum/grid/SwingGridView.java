@@ -47,6 +47,7 @@ public class SwingGridView extends JFrame implements GridView {
     }
     this.grid = grid;
 
+    
     this.setupBoard();  // yes keep this order ;-)
     // the board needs to be ready before we construct
     // the window
@@ -115,7 +116,6 @@ public class SwingGridView extends JFrame implements GridView {
       somethingChanged = true;
     }
 
-
     if (somethingChanged) {
       this.board.render();
     }
@@ -128,7 +128,9 @@ public class SwingGridView extends JFrame implements GridView {
 
     // add sectors
     for (Sector sector : this.grid.getSectors()) {
-      this.board.addSector(sector.getLeft() - minLeft, sector.getTop() - minTop);
+      int x = sector.getLeft() - minLeft;
+      int y = sector.getTop() - minTop;
+      this.board.addSector(x, y);
     }
   }
 

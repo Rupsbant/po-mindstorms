@@ -121,7 +121,7 @@ public class GhostDriver implements Driver {
           queue.add(new TurnAction(model, -90).setIsNonInterruptable(true));
         } else if (a == GhostAction.FORWARD) {
           queueProximityCorrectionAction();
-          queue.add(new MoveAction(model, 0.4f));
+          queue.add(new MoveAction(model, 0.5f));
         } else {
           throw new RuntimeException("Unknown GhostAction");
         }

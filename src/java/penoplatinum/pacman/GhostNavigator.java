@@ -19,6 +19,7 @@ import penoplatinum.simulator.Bearing;
 import penoplatinum.simulator.Model;
 
 import penoplatinum.simulator.Navigator;
+import penoplatinum.util.Utils;
 
 public class GhostNavigator implements Navigator {
   private GhostModel model;
@@ -91,6 +92,11 @@ public class GhostNavigator implements Navigator {
         count++;
       }
     }
+    Utils.Log("Max: "+max);
+    Utils.Log("0:"+values[0]);
+    Utils.Log("1:"+values[1]);
+    Utils.Log("2:"+values[2]);
+    Utils.Log("3:"+values[3]);
     
     // TODO: maybe take into account the move with least turns ?
     
@@ -153,7 +159,7 @@ public class GhostNavigator implements Navigator {
   
   private int getMax(int[] values) {
     // find max
-    int max = 0;
+    int max = -20000;
     for( int value : values ) {
       if( value > max ) { max = value; }
     }

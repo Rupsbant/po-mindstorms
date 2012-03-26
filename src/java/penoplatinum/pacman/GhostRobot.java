@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import penoplatinum.Config;
 
-import penoplatinum.util.Utils;
 
 import penoplatinum.driver.Driver;
 import penoplatinum.driver.GhostDriver;
 
 import penoplatinum.grid.GridView;
-import penoplatinum.grid.Sector;
 
 import penoplatinum.model.GhostModel;
 import penoplatinum.model.Reporter;
-import penoplatinum.model.GridModelPart;
 import penoplatinum.model.processor.AgentWallsUpdateProcessor;
 import penoplatinum.model.processor.BarcodeBlackModelProcessor;
 import penoplatinum.model.processor.GhostProtocolModelProcessor;
@@ -186,7 +183,8 @@ public class GhostRobot implements Robot {
 
     // ask navigator what to do and ...
     // let de driver drive, manhattan style ;-)
-    this.driver.perform(this.navigator.nextAction());
+    int action = this.navigator.nextAction();
+    this.driver.perform(action);
 
     // send outgoing messages
     this.sendMessages();

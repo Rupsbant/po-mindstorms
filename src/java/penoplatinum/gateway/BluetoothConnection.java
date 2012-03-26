@@ -8,11 +8,6 @@ package penoplatinum.gateway;
  * Author: Team Platinum
  */
 import java.io.*;
-import java.util.Scanner;
-
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import penoplatinum.bluetooth.*;
 import penoplatinum.Config;
 import penoplatinum.util.Utils;
