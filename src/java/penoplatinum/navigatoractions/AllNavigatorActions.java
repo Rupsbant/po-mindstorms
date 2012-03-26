@@ -1,6 +1,6 @@
 package penoplatinum.navigatoractions;
 
-import java.util.HashMap;
+import penoplatinum.SimpleHashMap;
 import penoplatinum.pacman.GhostAction;
 
 /**
@@ -12,10 +12,10 @@ public class AllNavigatorActions {
   private static final NavigatorAction TURN_LEFT = new TurnLeftNavigatorAction();
   private static final NavigatorAction TURN_RIGHT = new TurnRightNavigatorAction();
   private static final NavigatorAction WAIT = new WaitNavigatorAction();
-  public static final HashMap<Integer, NavigatorAction> actions = getActionHashMap();
+  public static final SimpleHashMap<Integer, NavigatorAction> actions = getActionHashMap();
 
-  private static HashMap<Integer, NavigatorAction> getActionHashMap() {
-    HashMap<Integer, NavigatorAction> out = new HashMap<Integer, NavigatorAction>();
+  private static SimpleHashMap<Integer, NavigatorAction> getActionHashMap() {
+    SimpleHashMap<Integer, NavigatorAction> out = new SimpleHashMap<Integer, NavigatorAction>();
     out.put(GhostAction.FORWARD, MOVE_FORWARD);
     out.put(GhostAction.TURN_LEFT, TURN_LEFT);
     out.put(GhostAction.TURN_RIGHT, TURN_RIGHT);

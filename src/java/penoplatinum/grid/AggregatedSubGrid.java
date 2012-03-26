@@ -74,8 +74,8 @@ public class AggregatedSubGrid {
       Sector barcodeSector = storageGrid.getOrCreateSector(left, top);
       
       
-      barcodeSector.setTagCode(code);
-      barcodeSector.setTagBearing(bearing);
+      barcodeSector.setTagCode((byte) code);
+      barcodeSector.setTagBearing((byte) bearing);
 
       // tag the current sector of the agent with the given barcode
       // check if we have it too
@@ -88,8 +88,8 @@ public class AggregatedSubGrid {
       }
     } else {
       Sector barcodeSector = storageGrid.getOrCreateSector(left, top);
-      barcodeSector.setTagCode(code);
-      barcodeSector.setTagBearing((bearing + transformation.getRotation()) % 4);
+      barcodeSector.setTagCode((byte) code);
+      barcodeSector.setTagBearing((byte) ((bearing + transformation.getRotation()) % 4));
 
       //TODO: decide what to do know
 

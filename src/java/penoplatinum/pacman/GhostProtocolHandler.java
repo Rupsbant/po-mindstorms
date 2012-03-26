@@ -46,6 +46,7 @@ public class GhostProtocolHandler implements ProtocolHandler {
   public GhostProtocolHandler useGatewayClient(GatewayClient client) {
     this.client = client;
     this.sendJoin();
+    begin();
     return this;
   }
 
@@ -82,7 +83,7 @@ public class GhostProtocolHandler implements ProtocolHandler {
     } catch (Exception e) {
       if (Config.DEBUGMODE) {
         Utils.Log("Protocol error!! (" + msg + ")");
-        e.printStackTrace();
+        //e.printStackTrace();
       }
     }
   }
@@ -94,7 +95,7 @@ public class GhostProtocolHandler implements ProtocolHandler {
 
     // init conversation if we have seen 4 joins (we were first)
     if (!this.connected) {
-      if (this.joins >= 4) {
+      if (this.joins >= 0) {
         this.begin();
       }
     }
@@ -115,7 +116,7 @@ public class GhostProtocolHandler implements ProtocolHandler {
     this.connected = true;
     this.joins = 4;
     this.sendName();
-
+    
     this.agent.activate();
   }
 

@@ -159,6 +159,7 @@ public class GhostRobot implements Robot {
       this.model.process();
       return;
     }
+    System.out.println("TEste");
     // poll other sensors and update model
     this.model.getSensorPart().updateSensorValues(this.api.getSensorValues());
     this.model.process();
