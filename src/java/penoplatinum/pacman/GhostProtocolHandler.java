@@ -11,14 +11,10 @@ package penoplatinum.pacman;
 import penoplatinum.Config;
 
 import penoplatinum.model.GhostModel;
-
 import penoplatinum.grid.Agent;
 import penoplatinum.grid.Sector;
-
 import penoplatinum.simulator.Bearing;
-
 import penoplatinum.gateway.GatewayClient;
-
 import penoplatinum.util.Utils;
 import penoplatinum.util.MyScanner;
 
@@ -59,8 +55,12 @@ public class GhostProtocolHandler implements ProtocolHandler {
   public void receive(String msg) {
     try {
       // TODO: strip retarded newline IF it's there
-      if( Config.PROTOCOL_USE_RETARDEDNEWLINE ) {
+      if( Config.PROTOCOL_USE_RETARDEDNEWLINE) {
         msg = msg.substring(0, msg.length() - 2);
+      } else if( Config.PROTOCOL_REMOVE_MAYBE_RETARDEDNEWLINE) {
+        if(msg.substring(msg.length()-2).equals("\\n")){
+          msg = msg.substring(0, msg.length() - 2);
+        }
       }
 
       MyScanner scanner = new MyScanner(msg);//.useDelimiter("[ ,]");

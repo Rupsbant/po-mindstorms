@@ -20,7 +20,11 @@ public class Config {
   public final static String GHOST_CHANNEL = "PLATINUM";
   // public final static String GHOST_CHANNEL = "Ghost";
   
+  //This always removes the "\\n" on the end of a line
   public final static boolean PROTOCOL_USE_RETARDEDNEWLINE = true;
+  //This removes the "\\n" on the end of a line when present
+  //This is not checked when PROTOCOL_USE_RETARDEDNEWLINE is true
+  public final static boolean PROTOCOL_REMOVE_MAYBE_RETARDEDNEWLINE = true;
 
   // a SimulatedGatewayClient can use a local MQ (when all ghosts run in the
   // same Simulator and use a Singleton SimulatedMQ object to exchange msgs.
