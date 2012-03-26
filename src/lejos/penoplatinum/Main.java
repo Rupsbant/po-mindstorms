@@ -7,6 +7,8 @@ import penoplatinum.bluetooth.RobotBluetoothConnection;
 import penoplatinum.bluetooth.RobotGatewayClient;
 import penoplatinum.driver.GhostDriver;
 import penoplatinum.gateway.BluetoothConnection;
+import penoplatinum.model.Reporter;
+import penoplatinum.pacman.DashboardReporter;
 import penoplatinum.pacman.GhostRobot;
 import penoplatinum.pacman.GhostNavigator;
 import penoplatinum.sensor.IRSeekerV2;
@@ -28,6 +30,9 @@ public class Main {
     robotBluetoothAgent.useConnection(conn2);
 
     robot.useGatewayClient(robotBluetoothAgent);
+    
+    Reporter reporter = new DashboardReporter();
+    reporter.useGatewayClient(robotBluetoothAgent).setRobot(robot);
     //robotBluetoothAgent.run(); This is started in robot.useGatewayClient(agent)
 //        initializeAgent(angie);
     Runnable runnable = new Runnable() {
