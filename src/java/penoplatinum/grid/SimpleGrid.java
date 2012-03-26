@@ -10,7 +10,7 @@ package penoplatinum.grid;
 import java.util.List;
 import java.util.ArrayList;
 
-import penoplatinum.SimpleHashMap;
+import penoplatinum.IntegerMap;
 import penoplatinum.barcode.BarcodeTranslator;
 import penoplatinum.util.Point;
 import penoplatinum.util.TransformationTRT;
@@ -24,7 +24,8 @@ public class SimpleGrid implements Grid {
 
   int minLeft = 0, maxLeft = 0, minTop = 0, maxTop = 0;
   // mapping from coordinates to allocating Sector
-  private SimpleHashMap<Integer, Sector> sectors = new SimpleHashMap<Integer, Sector>();
+  //private SimpleHashMap<Integer, Sector> sectors = new SimpleHashMap<Integer, Sector>();
+  private IntegerMap<Sector> sectors = new IntegerMap<Sector>();
   private List<Sector> taggedSectors = new ArrayList<Sector>();
   // all agents in a row
   private List<Agent> agents = new ArrayList<Agent>();
@@ -134,9 +135,9 @@ public class SimpleGrid implements Grid {
   }
 
   public List<Sector> getSectors() {
-    @SuppressWarnings("unchecked")
-    List<Sector> sectors = new ArrayList(this.sectors.values());
-    return sectors;
+    //@SuppressWarnings("unchecked")
+    //List<Sector> sectors = new ArrayList(this.sectors.values());
+    return sectors.values();
   }
 
   private void connect(Sector sector, Sector other, int location) {

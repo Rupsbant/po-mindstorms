@@ -8,15 +8,29 @@ public class TestenMemory {
 
   public static void main() {
     System.out.println(Runtime.getRuntime().freeMemory());
-    Sector[] s = new Sector[510];
+    Sector s = new Sector();
     System.out.println(Runtime.getRuntime().freeMemory());
-    for(int i = 0; i<10; i++){
-      s[i] = new Sector(null);
+    int xMax = 10;
+    int yMax = 10;
+    System.out.println(Runtime.getRuntime().freeMemory());
+    SimpleGrid g = new SimpleGrid();
+    System.out.println(Runtime.getRuntime().freeMemory());
+    for (int i = 0; i < xMax; i++) {
+      for (int j = 0; j < yMax; j++) {
+        g.addSector(new Sector().setCoordinates(i, j));
+      }
     }
     System.out.println(Runtime.getRuntime().freeMemory());
-    for(int i = 10; i<510; i++){
-      s[i] = new Sector(null);
+    System.gc();
+    System.out.println(Runtime.getRuntime().freeMemory());
+    int xStart = 10;
+    for (int i = xStart; i < xStart + xMax; i++) {
+      for (int j = 0; j < yMax; j++) {
+        g.addSector(new Sector().setCoordinates(i, j));
+      }
     }
+    System.out.println(Runtime.getRuntime().freeMemory());
+    System.gc();
     System.out.println(Runtime.getRuntime().freeMemory());
   }
 
