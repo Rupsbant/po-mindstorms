@@ -21,24 +21,24 @@ public class AggregatedGridTest {
     SimpleGrid remote = (SimpleGrid) GridFactory.load("..\\..\\src\\java\\penoplatinum\\simulator\\mini\\testGRTS-remote.map");
     SimpleGrid merged = (SimpleGrid) GridFactory.load("..\\..\\src\\java\\penoplatinum\\simulator\\mini\\testGRTS-merged.map");
 
-    
-    local.getSector(1, 0).setTagCode(codeLocal);
-    local.getSector(1, 0).setTagBearing(bearingLocal);
-    
-    remote.getSector(0, 0).setTagCode(codeRemote);
-    remote.getSector(0, 0).setTagBearing(bearingRemote);
-    
-    merged.getSector(1, 0).setTagCode(codeLocal);
-    merged.getSector(1, 0).setTagBearing(bearingLocal);
-    
+
+    local.getSector(1, 0).setTagCode((byte) codeLocal);
+    local.getSector(1, 0).setTagBearing((byte) bearingLocal);
+
+    remote.getSector(0, 0).setTagCode((byte) codeRemote);
+    remote.getSector(0, 0).setTagBearing((byte) bearingRemote);
+
+    merged.getSector(1, 0).setTagCode((byte) codeLocal);
+    merged.getSector(1, 0).setTagBearing((byte) bearingLocal);
+
     AggregatedGrid grid1 = new AggregatedGrid();
 
     SimpleGrid.copyGridTo(grid1, local, TransformationTRT.Identity);
     SimpleGrid.copyGridTo(grid1.getGhostGrid("ghost"), remote, TransformationTRT.Identity);
 
-    
-    
-    Assert.assertTrue(grid1.attemptMapBarcode(grid1.getSector(1, 0),grid1.getGhostGrid("ghost").getSector(0, 0),"ghost"));
+
+
+    Assert.assertTrue(grid1.attemptMapBarcode(grid1.getSector(1, 0), grid1.getGhostGrid("ghost").getSector(0, 0), "ghost"));
 
 
 //    local.displayOn(new SwingGridView());
@@ -60,7 +60,7 @@ public class AggregatedGridTest {
     int barcodeY = 3;
 
     SimpleGrid original = (SimpleGrid) GridFactory.load("..\\..\\src\\java\\penoplatinum\\simulator\\mini\\corridor.map");
-    original.getSector(barcodeX, barcodeY).setTagCode(42);
+    original.getSector(barcodeX, barcodeY).setTagCode((byte) 42);
 
     AggregatedGrid grid1 = new AggregatedGrid();
 
@@ -90,7 +90,7 @@ public class AggregatedGridTest {
     int barcodeY = 3;
 
     SimpleGrid original = (SimpleGrid) GridFactory.load("..\\..\\src\\java\\penoplatinum\\simulator\\mini\\corridor.map");
-    original.getSector(barcodeX, barcodeY).setTagCode(42);
+    original.getSector(barcodeX, barcodeY).setTagCode((byte) 42);
 
     AggregatedGrid grid1 = new AggregatedGrid();
 
@@ -151,9 +151,9 @@ public class AggregatedGridTest {
     SimpleGrid.copyGridTo(grid1, local, TransformationTRT.Identity);
     SimpleGrid.copyGridTo(grid1.getGhostGrid("ghost"), remote, TransformationTRT.Identity);
 
-    
-    
-    Assert.assertTrue(grid1.attemptMapBarcode(grid1.getSector(1, 0),grid1.getGhostGrid("ghost").getSector(0, 0),"ghost"));
+
+
+    Assert.assertTrue(grid1.attemptMapBarcode(grid1.getSector(1, 0), grid1.getGhostGrid("ghost").getSector(0, 0), "ghost"));
 
 
 //    local.displayOn(new SwingGridView());
@@ -166,7 +166,7 @@ public class AggregatedGridTest {
 
 
   }
-  
+
   @Test
   public void testMapBarcodeInverse() {
     testBarcodeMap(19, 0, 19, 1);

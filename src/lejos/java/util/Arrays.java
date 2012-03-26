@@ -1,15 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package java.util;
 
 /**
- *
+ * A copy implementing missing methods.
  * @author MHGameWork
  */
 public class Arrays {
 
+  public static <T extends Object> T[] copyOf(T[] original, int newLength) {
+    if (newLength < 0) {
+      throw new IllegalArgumentException("Illegal length");
+    }
+    T[] copy = (T[]) new Object[newLength];
+    System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
+    return copy;
+  }
+
+  public static byte[] copyOf(byte[] original, int newLength) {
+    if (newLength < 0) {
+      throw new IllegalArgumentException("Illegal length");
+    }
+    byte[] copy = new byte[newLength];
+    System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
+    return copy;
+  }
 
   /**
    * Copies the specified range of the specified array into a new array.
@@ -47,5 +60,4 @@ public class Arrays {
             Math.min(original.length - from, newLength));
     return copy;
   }
-
 }
