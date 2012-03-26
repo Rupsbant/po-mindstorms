@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package penoplatinum.actions;
 
 import penoplatinum.model.processor.GapModelProcessor;
@@ -14,47 +10,30 @@ import penoplatinum.simulator.RobotAPI;
  * @author: Team Platinum
  */
 public class GapDetectionRestoreAction extends BaseAction {
-
-  private final RobotAPI api;
-  private Model model;
   private GapModelProcessor proc;
+  int state = -1;
 
   public GapDetectionRestoreAction(RobotAPI api, Model model) {
     super(model);
-    this.api = api;
-    this.model = model;
-
     proc = new GapModelProcessor(null);
-    proc.setModel(model);
-
+    proc.setModel(getModel());
   }
-  int state = -1;
 
   @Override
   public int getNextAction() {
-
-    if (model.getSensorPart().isTurning()) {
+    if (getModel().getSensorPart().isTurning()) {
       return Navigator.NONE;
     }
-
-
-
     state++;
-
     return getStateStart();
-
   }
 
   private int getStateStart() {
-
     if (state == 0) {
-
       proc.performGapDetectionOnBuffer();
-      if (model.getGapPart().isGapFound()) {
-        int diff = (model.getGapPart().getGapStartAngle() + model.getGapPart().getGapEndAngle()) / 2;
-
+      if (getModel().getGapPart().isGapFound()) {
+        int diff = (getModel().getGapPart().getGapStartAngle() + getModel().getGapPart().getGapEndAngle()) / 2;
         setAngle(diff);
-
         return Navigator.TURN;
       }
     }
@@ -68,7 +47,7 @@ public class GapDetectionRestoreAction extends BaseAction {
 
   @Override
   public String getKind() {
-    return "Align to line";
+    return "Align to gap";
   }
 
   @Override

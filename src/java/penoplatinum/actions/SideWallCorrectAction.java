@@ -1,53 +1,35 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package penoplatinum.actions;
 
 import penoplatinum.simulator.Model;
 import penoplatinum.simulator.Navigator;
 
 /**
- *
- * @author MHGameWork
+ * This Action moves a set distance to the left.
+ * @author Team Platinum
  */
 public class SideWallCorrectAction extends BaseAction {
-
-  private Model model;
-  private final float correction;
+  private int phase = -1;
 
   public SideWallCorrectAction(Model m, float correction) {
     super(m);
-    model = m;
-    this.correction = correction;
+      setAngle(90);
+      setDistance(correction);
   }
-  private boolean first = true;
-  private boolean complete = false;
-  private int phase = 0;
 
   @Override
   public int getNextAction() {
-    Model m = model;
-    if (first) {
-      first = false;
-
-
-
-      setAngle(90);
-      setDistance(correction);
+    if (phase == -1) {
+      phase++;
       return Navigator.STOP;
-
     }
-
-    if (model.getSensorPart().isTurning() || model.getSensorPart().isMoving()) {
+    if (getModel().getSensorPart().isTurning() || getModel().getSensorPart().isMoving()) {
       return Navigator.NONE;
     }
-
-    phase++;
     return getStartNavigatorAction();
   }
 
   private int getStartNavigatorAction() {
+    phase++;
     switch (phase) {
       case 1:
         return Navigator.TURN;
@@ -62,7 +44,7 @@ public class SideWallCorrectAction extends BaseAction {
 
   @Override
   public boolean isComplete() {
-    return complete || phase > 3;
+    return phase > 3;
 
   }
 

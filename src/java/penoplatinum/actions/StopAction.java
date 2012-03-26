@@ -2,6 +2,10 @@ package penoplatinum.actions;
 
 import penoplatinum.simulator.Navigator;
 
+/**
+ * This Action makes the robot wait for a set time.
+ * @author Team Platinum
+ */
 public class StopAction extends BaseAction {
 
   public StopAction() {

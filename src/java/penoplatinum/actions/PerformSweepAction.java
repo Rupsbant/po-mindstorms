@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package penoplatinum.actions;
 
 import java.util.ArrayList;
@@ -40,15 +36,11 @@ public class PerformSweepAction extends BaseAction {
 
   @Override
   public int getNextAction() {
-
     if (api.sweepInProgress()) {
       return Navigator.STOP;
     }
-
-
     state++;
     return getStateStart();
-
   }
 
   private int getStateStart() {
