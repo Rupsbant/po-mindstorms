@@ -138,6 +138,7 @@ public class GhostRobot implements Robot {
   public GhostRobot useReporter(Reporter reporter) {
     this.reporter = reporter;
     this.reporter.setRobot(this);
+    this.model.setReporter(this.reporter);
     return this;
   }
 
