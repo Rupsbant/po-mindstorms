@@ -34,6 +34,7 @@ import penoplatinum.simulator.RobotAPI;
 import penoplatinum.simulator.Navigator;
 
 import penoplatinum.gateway.GatewayClient;
+import penoplatinum.util.Utils;
 
 
 public class GhostRobot implements Robot {
@@ -180,6 +181,7 @@ public class GhostRobot implements Robot {
       this.waitingForSweep = true;
       return; // to wait for results
     }
+    Utils.Log(getModel().getGridPart().getGrid().getSize()+"");
 
     // ask navigator what to do and ...
     // let de driver drive, manhattan style ;-)
