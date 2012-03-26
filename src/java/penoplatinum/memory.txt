@@ -1,0 +1,19 @@
+57676 //Start
+56836 //sector and NullGrid
+56808 //stack and new String
+56508 //SimpleGrid
+49184 //100 sectors to grid
+51832 //gc
+43716 //100 to grid
+45952 //gc
+
+
+//OLD
+57680
+56840
+56812
+56484
+44688
+50752
+40308
+44616

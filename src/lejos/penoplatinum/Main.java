@@ -14,31 +14,14 @@ import penoplatinum.sensor.IRSeekerV2;
 public class Main {
 
   public static void main(String[] args) throws Exception {
-    TestenMemory.main();
-    int a = 1;
-    while(1==a){
-      Utils.Sleep(1000);
-    }
-//    byte[] b = new byte[55 * 1024];
-//    testCountMemory();
-    //Runtime.getRuntime().gc();
-    //testGridMemory();
-//    if (0 == 0) {
-//      return;
-//    }
-
     GhostRobot robot = new GhostRobot("Michiel");
-    //robot.useNavigator(new LeftFollowingGhostNavigator(robot.getGhostModel()));
     robot.useNavigator(new GhostNavigator());
     robot.useDriver(new GhostDriver());
 
-
     final AngieEventLoop angie = new AngieEventLoop(robot);
-
     RobotBluetoothConnection conn = new RobotBluetoothConnection();
     conn.initializeConnection();
     Utils.EnableRemoteLogging(conn);
-    
     BluetoothConnection conn2 = new BluetoothConnection(conn);
 
     final RobotGatewayClient robotBluetoothAgent = new RobotGatewayClient();
@@ -46,8 +29,6 @@ public class Main {
 
     robot.useGatewayClient(robotBluetoothAgent);
     //robotBluetoothAgent.run(); This is started in robot.useGatewayClient(agent)
-
-
 //        initializeAgent(angie);
     Runnable runnable = new Runnable() {
 

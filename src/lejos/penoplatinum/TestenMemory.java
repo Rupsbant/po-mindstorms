@@ -7,6 +7,15 @@ import penoplatinum.util.Utils;
 public class TestenMemory {
 
   public static void main() {
+    
+//    byte[] b = new byte[55 * 1024];
+//    testCountMemory();
+    //Runtime.getRuntime().gc();
+    //testGridMemory();
+//    if (0 == 0) {
+//      return;
+//    }
+    
     System.out.println(Runtime.getRuntime().freeMemory());
     Sector s = new Sector();
     System.out.println(Runtime.getRuntime().freeMemory());

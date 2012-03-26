@@ -1,5 +1,6 @@
 package penoplatinum;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class IntegerMap<Value>{
   public void put(int key, Value value) {
     int index = indexOf(key);
     if (index == -1) {
+      ensureCapacity();
       keys[size] = index;
       values[size] = value;
-      index++;
+      size++;
       return;
     }
     values[index] = value;
@@ -46,7 +48,11 @@ public class IntegerMap<Value>{
   }
 
   public List<Value> values() {
-    return Arrays.asList(values);
+    List<Value> out = new ArrayList<Value>(size);
+    for(Value v : values){
+      out.add(v);
+    }
+    return out;
   }
 
   public int findKey(Value g) {
@@ -57,7 +63,7 @@ public class IntegerMap<Value>{
     return -1;
   }
   
-  public void ensureCapacity(){
+  private void ensureCapacity(){
     if(size < keys.length){
       return;
     }

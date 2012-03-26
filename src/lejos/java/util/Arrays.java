@@ -15,11 +15,11 @@ public class Arrays {
     return copy;
   }
 
-  public static byte[] copyOf(byte[] original, int newLength) {
+  public static int[] copyOf(int[] original, int newLength) {
     if (newLength < 0) {
       throw new IllegalArgumentException("Illegal length");
     }
-    byte[] copy = new byte[newLength];
+    int[] copy = new int[newLength];
     System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
     return copy;
   }
